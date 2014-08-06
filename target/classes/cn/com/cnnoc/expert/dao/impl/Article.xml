@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.cms.backend.model.Article">
+	<insert id="insert" parameterType="Article" useGeneratedKeys="true" keyProperty="id">
+		insert into t_article 
+		(title,source,content,author,keyword,intro,type,recommend,headline,topicId,createTime,updateTime,adminId) 
+		values
+		(#{title},#{source},#{content},#{author},#{keywords},#{intro},#{type},#{recommend},#{headline},#{topicId},#{createTime},#{updateTime},#{userId})
+	</insert>
+	<insert id="insertArticleChannel" parameterType="map">
+		insert into t_channel_article (channelId,articleId) values (#{c.id},#{a.id});
+	</insert>
+	
+</mapper>

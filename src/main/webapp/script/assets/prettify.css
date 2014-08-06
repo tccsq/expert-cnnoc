@@ -1,0 +1,138 @@
+.pln {
+	COLOR: #000
+}
+
+@media Screen    
+{
+.str {
+	COLOR: #080
+}
+.kwd {
+	COLOR: #008
+}
+.com {
+	COLOR: #800
+}
+.typ {
+	COLOR: #606
+}
+.lit {
+	COLOR: #066
+}
+.pun {
+	COLOR: #660
+}
+.opn {
+	COLOR: #660
+}
+.clo {
+	COLOR: #660
+}
+.tag {
+	COLOR: #008
+}
+.atn {
+	COLOR: #606
+}
+.atv {
+	COLOR: #080
+}
+.dec {
+	COLOR: #606
+}
+.var {
+	COLOR: #606
+}
+.fun {
+	COLOR: red
+}
+
+}
+
+@media Print, Projection    
+{
+.str {
+	COLOR: #060
+}
+.kwd {
+	COLOR: #006; FONT-WEIGHT: bold
+}
+.com {
+	FONT-STYLE: italic; COLOR: #600
+}
+.typ {
+	COLOR: #404; FONT-WEIGHT: bold
+}
+.lit {
+	COLOR: #044
+}
+.pun {
+	COLOR: #440
+}
+.opn {
+	COLOR: #440
+}
+.clo {
+	COLOR: #440
+}
+.tag {
+	COLOR: #006; FONT-WEIGHT: bold
+}
+.atn {
+	COLOR: #404
+}
+.atv {
+	COLOR: #060
+}
+    }
+PRE.prettyprint {
+	BORDER-BOTTOM: #888 1px solid; BORDER-LEFT: #888 1px solid; PADDING-BOTTOM: 2px; PADDING-LEFT: 2px; PADDING-RIGHT: 2px; BORDER-TOP: #888 1px solid; BORDER-RIGHT: #888 1px solid; PADDING-TOP: 2px
+}
+OL.linenums {
+	MARGIN-TOP: 0px; MARGIN-BOTTOM: 0px
+}
+LI.L0 {
+	LIST-STYLE-TYPE: none
+}
+LI.L1 {
+	LIST-STYLE-TYPE: none
+}
+LI.L2 {
+	LIST-STYLE-TYPE: none
+}
+LI.L3 {
+	LIST-STYLE-TYPE: none
+}
+LI.L5 {
+	LIST-STYLE-TYPE: none
+}
+LI.L6 {
+	LIST-STYLE-TYPE: none
+}
+LI.L7 {
+	LIST-STYLE-TYPE: none
+}
+LI.L8 {
+	LIST-STYLE-TYPE: none
+}
+LI.L1 {
+	BACKGROUND: #eee
+}
+LI.L3 {
+	BACKGROUND: #eee
+}
+LI.L5 {
+	BACKGROUND: #eee
+}
+LI.L7 {
+	BACKGROUND: #eee
+}
+LI.L9 {
+	BACKGROUND: #eee
+}
+PRE.prettyprint {
+	BORDER-BOTTOM-COLOR: #d1d7dc; BORDER-TOP-COLOR: #d1d7dc; BORDER-RIGHT-COLOR: #d1d7dc; BORDER-LEFT-COLOR: #d1d7dc
+}
+OL.linenums LI {
+	BORDER-LEFT: #d1d7dc 1px solid; LINE-HEIGHT: 18px; LIST-STYLE-TYPE: decimal; PADDING-LEFT: 10px; BACKGROUND: #fff; COLOR: #2b91af; MARGIN-LEFT: 5px
+}
