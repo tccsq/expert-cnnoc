@@ -1,0 +1,18 @@
+
+CREATE TABLE `NewTable` (
+`id`  int(11) NOT NULL AUTO_INCREMENT ,
+`username`  varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
+`password`  varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
+`empno`  varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
+`lastModifyDate`  timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
+`createDate`  timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ,
+`createBy`  int(11) NOT NULL ,
+`modifyBy`  int(11) NULL DEFAULT NULL ,
+PRIMARY KEY (`id`),
+UNIQUE INDEX `index_user_id` (`id`) USING BTREE 
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+AUTO_INCREMENT=9
+ROW_FORMAT=COMPACT
+;
