@@ -41,7 +41,7 @@
 		var pwd = $('#pwd').attr('value');
 		var checkcode = $('#checkcode').attr('value');
 		$('#errormsg').text("");
-		var param = "username:" + username + ",password:" + pwd + ",checkcode:"
+		var param = "username=" + username + "&password=" + pwd + "&checkcode="
 				+ checkcode;
 
 		if (username != "" && pwd != "" && checkcode != "") {
@@ -53,13 +53,19 @@
 				data : param,
 				async : false,
 				success : function(data) {
-					window.location = "main.html"
+					if (data.status == "error") {
+						$('#errormsg').text("");
+						$('#errormsg').text(data.msg);
+					} else {
+						window.location = "main.jsp"
+					}
 				},
 				error : function(msg) {
-					alert("error");
+					$('#errormsg').text("");
+					$('#errormsg').text("程序异常：" + msg.responseText);
 				}
 			});
-			
+
 		} else
 		/* 	if (checkcode == "") {
 			$('#errormsg').text("");
@@ -114,6 +120,7 @@
 	<div id="dlg-buttons" style="padding-right: 30px;">
 		<a href="#" class="easyui-linkbutton" iconCls="icon-ok"
 			onclick="login()">确定</a>
+		<button onclick="login()">确定</button>
 	</div>
 </body>
 </html>

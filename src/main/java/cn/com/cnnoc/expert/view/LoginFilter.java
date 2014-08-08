@@ -33,7 +33,6 @@ public class LoginFilter implements Filter {
 		
 		if(url.matches(param)){
 			
-			//如果不是登录页面
 			if(!page.equals("/backend/LoginServlet") && !page.equals("/backend/login.jsp")){
 				if(userInfo == null){
 					response.sendRedirect(request.getContextPath()+"/backend/login.jsp");

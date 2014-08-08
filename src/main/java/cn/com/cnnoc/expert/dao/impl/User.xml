@@ -3,15 +3,28 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.com.cnnoc.expert.model.User">
+	<resultMap type="User" id="userMap">
+		<id column="id" property="id" />
+		<result column="username" property="username" />
+		<result column="password" property="password" />
+		<result column="empno" property="empno" />
+		<result column="roleType" property="role"
+			typeHandler="cn.com.cnnoc.expert.handler.EnumRoleHandler" />
+		<result column="createDate" property="createDate" />
+		<result column="lastModifyDate" property="lastModifyDate" />
+		<result column="createBy" property="createBy" />
+		<result column="modifyBy" property="modifyBy" />
+	</resultMap>
+
 	<insert id="insert" parameterType="User">
 		insert into t_user
-		(username,password,empno,createBy,modifyBy,createDate) values
-		(#{username},#{password},#{empno},#{createBy},#{modifyBy},#{createDate})
+		(username,password,empno,roleType,createBy,modifyBy,createDate) values
+		(#{username},#{password},#{empno},#{role,typeHandler=cn.com.cnnoc.expert.handler.EnumRoleHandler},
+			#{createBy},#{modifyBy},#{createDate})
 	</insert>
 	<update id="update" parameterType="User">
 		update t_user set username =
-		#{username}, password = #{password},empno = #{empno},
-		modifyBy =#{modifyBy}
+		#{username}, password = #{password},empno = #{empno},modifyBy = #{modifyBy}
 		where id = #{id}
 	</update>
 	<select id="findUserByUsername" parameterType="string"

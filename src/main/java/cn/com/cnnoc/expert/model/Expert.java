@@ -3,7 +3,7 @@ package cn.com.cnnoc.expert.model;
 public class Expert extends BaseEntity {
 	private String expertName;
 	private String major;
-	private String desc;
+	private String expertDesc;
 
 	public String getExpertName() {
 		return expertName;
@@ -21,11 +21,11 @@ public class Expert extends BaseEntity {
 		this.major = major;
 	}
 
-	public String getDesc() {
-		return desc;
+	public String getExpertDesc() {
+		return expertDesc;
 	}
 
-	public void setDesc(String desc) {
-		this.desc = desc;
+	public void setExpertDesc(String expertDesc) {
+		this.expertDesc = expertDesc;
 	}
 }

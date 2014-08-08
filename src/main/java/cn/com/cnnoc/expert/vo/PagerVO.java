@@ -2,9 +2,9 @@ package cn.com.cnnoc.expert.vo;
 
 import java.util.List;
 
-public class PagerVO {
+public class PagerVO<T> {
 	private int total;
-	private List datas;
+	private List<T> datas;
 
 	public int getTotal() {
 		return total;
@@ -14,11 +14,12 @@ public class PagerVO {
 		this.total = total;
 	}
 
-	public List getDatas() {
+	public List<T> getDatas() {
 		return datas;
 	}
 
-	public void setDatas(List datas) {
+	public void setDatas(List<T> datas) {
 		this.datas = datas;
 	}
+
 }

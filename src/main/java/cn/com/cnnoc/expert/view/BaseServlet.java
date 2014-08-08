@@ -89,7 +89,15 @@ public class BaseServlet extends HttpServlet {
 		
 	}
 	
-	
+	protected void writeJson(HttpServletResponse response, String json) {
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/json;charset=utf-8");
+		try {
+			response.getWriter().print(json);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	
 
 }
