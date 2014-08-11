@@ -36,6 +36,11 @@ public class UserDaoImplTest extends TestCase {
 		User u = userDao.findUserByUsername("user1");
 		System.out.println(u.getId());
 	}
+	
+	public void testFindUserById() {
+		User u = userDao.findById(User.class, 15);
+		System.out.println(u.getId());
+	}
 
 	public void testDeleteUser() {
 		User u = userDao.findUserByUsername("user1");

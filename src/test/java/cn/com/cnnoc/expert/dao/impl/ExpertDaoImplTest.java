@@ -25,14 +25,14 @@ public class ExpertDaoImplTest extends TestCase {
 	}
 
 	public void testUpdate() {
-		Expert expert = expertDao.findById(Expert.class,60);
+		Expert expert = expertDao.findById(Expert.class,170);
 		expert.setModifyBy(2);
 		expert.setExpertName("expert-updated");
 		expertDao.update(expert);
 	}
 
 	public void testFindById() {
-		Expert expert = expertDao.findById(Expert.class,60);
+		Expert expert = expertDao.findById(Expert.class,170);
 		System.out.println(expert.getExpertName());
 	}
 
@@ -44,6 +44,7 @@ public class ExpertDaoImplTest extends TestCase {
 
 	public void testFindPaged() {
 		PagerVO<Expert> pv = expertDao.findPaged(Expert.class, 10, 10);
+		System.out.println(pv.getTotal());
 		assertEquals(50, pv.getTotal());
 		
 	}

@@ -13,7 +13,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update t_expert set 
 		expertName=#{expertName}, 
 		major = #{major},
-		desc = #{desc},
+		expertDesc = #{expertDesc},
 		modifyBy = #{modifyBy} where id = #{id}
 	</update>
 	<select id="findById" parameterType="int" resultType="Expert">
@@ -22,7 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="findTotal" resultType="int">
 		select count(1) from t_expert
 	</select>
-	<select id="findPaged" parameterType="java.util.HashMap" resultType="java.util.List">
+	<select id="findPaged" parameterType="java.util.Map" resultType="Expert">
 		select * from t_expert limit #{start},#{rows}
 	</select>
 	<delete id="delete" parameterType="int">
