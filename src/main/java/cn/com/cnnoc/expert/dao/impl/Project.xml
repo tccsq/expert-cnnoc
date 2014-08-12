@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.cnnoc.expert.model.Project">
+
+	<insert id="insert" parameterType="Project">
+		insert into t_project
+		(projectName,projectLocation,projectDesc,startDate,endDate,createBy,modifyBy,createDate) values 
+		(#{projectName},#{projectLocation},#{projectDesc},#{startDate},#{endDate},#{createBy},#{modifyBy},#{createDate})
+	</insert>
+	<update id="update" parameterType="Project">
+		update t_project set 
+		projectName=#{projectName}, 
+		projectLocation = #{projectLocation},
+		projectDesc = #{projectDesc},
+		startDate = #{startDate},
+		endDate = #{endDate},
+		modifyBy = #{modifyBy} where id = #{id}
+	</update>
+	<select id="findById" parameterType="int" resultType="Project">
+		select * from t_project where id = #{id}
+	</select>
+	<select id="findTotal" resultType="int">
+		select count(1) from t_project
+	</select>
+	<select id="findPaged" parameterType="java.util.Map" resultType="Project">
+		select * from t_project limit #{start},#{rows}
+	</select>
+	<delete id="delete" parameterType="int">
+		delete from t_project where id = #{id}
+	</delete>
+	
+	
+</mapper>

@@ -1,18 +1,58 @@
-
 CREATE TABLE `NewTable` (
 `id`  int(11) NOT NULL AUTO_INCREMENT ,
 `username`  varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
 `password`  varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
 `empno`  varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
-`lastModifyDate`  timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
+`roleType`  int(1) NOT NULL ,
 `createDate`  timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ,
+`lastModifyDate`  timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
 `createBy`  int(11) NOT NULL ,
 `modifyBy`  int(11) NULL DEFAULT NULL ,
 PRIMARY KEY (`id`),
-UNIQUE INDEX `index_user_id` (`id`) USING BTREE 
+UNIQUE INDEX `index_user_id` (`id`) USING BTREE ,
+UNIQUE INDEX `index_user_username` (`username`) USING BTREE ,
+UNIQUE INDEX `index_user_empno` (`empno`) USING BTREE 
 )
 ENGINE=InnoDB
 DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
-AUTO_INCREMENT=9
+AUTO_INCREMENT=16
 ROW_FORMAT=COMPACT
 ;
+
+CREATE TABLE `NewTable` (
+`id`  int(11) NOT NULL AUTO_INCREMENT ,
+`projectName`  varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
+`projectLocation`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL ,
+`projectDesc`  text CHARACTER SET utf8 COLLATE utf8_general_ci NULL ,
+`createDate`  timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ,
+`lastModifyDate`  timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
+`createBy`  int(11) NOT NULL ,
+`modifyBy`  int(11) NULL DEFAULT NULL ,
+`startDate`  varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL ,
+`endDate`  varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL ,
+PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+AUTO_INCREMENT=253
+ROW_FORMAT=COMPACT
+;
+
+CREATE TABLE `NewTable` (
+`id`  int(11) NOT NULL AUTO_INCREMENT ,
+`expertName`  varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
+`major`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
+`expertDesc`  text CHARACTER SET utf8 COLLATE utf8_general_ci NULL ,
+`createDate`  timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ,
+`lastModifyDate`  timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
+`createBy`  int(11) NOT NULL ,
+`modifyBy`  int(11) NULL DEFAULT NULL ,
+PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+AUTO_INCREMENT=203
+ROW_FORMAT=COMPACT
+;
+
+
