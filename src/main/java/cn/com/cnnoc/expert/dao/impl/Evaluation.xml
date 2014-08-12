@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.cnnoc.expert.model.Evaluation">
+
+	<insert id="insert" parameterType="Evaluation">
+		insert into t_evaluation
+		(projectId,expertId,projectDesc,startDate,endDate,createBy,modifyBy,createDate) values 
+		(#{projectId},#{expertId},#{projectDesc},#{startDate},#{endDate},#{createBy},#{modifyBy},#{createDate})
+	</insert>
+	<update id="update" parameterType="Evaluation">
+		update t_evaluation set 
+		projectName=#{projectName}, 
+		projectLocation = #{projectLocation},
+		projectDesc = #{projectDesc},
+		startDate = #{startDate},
+		endDate = #{endDate},
+		modifyBy = #{modifyBy} where id = #{id}
+	</update>
+	<select id="findById" parameterType="int" resultType="Evaluation">
+		select * from t_evaluation where id = #{id}
+	</select>
+	<select id="findTotal" resultType="int">
+		select count(1) from t_evaluation
+	</select>
+	<select id="findPaged" parameterType="java.util.Map" resultType="Evaluation">
+		select * from t_evaluation limit #{start},#{rows}
+	</select>
+	<delete id="delete" parameterType="int">
+		delete from t_evaluation where id = #{id}
+	</delete>
+	
+	
+</mapper>
