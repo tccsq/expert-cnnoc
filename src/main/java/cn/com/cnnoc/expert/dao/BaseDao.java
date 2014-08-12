@@ -2,7 +2,6 @@ package cn.com.cnnoc.expert.dao;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 
-import cn.com.cnnoc.expert.model.Expert;
 import cn.com.cnnoc.expert.vo.PagerVO;
 
 public interface BaseDao<T> {
