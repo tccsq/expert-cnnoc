@@ -13,34 +13,99 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title></title>
 <%@ include file="/common/js.jsp"%>
+<style type="text/css">
+#fm {
+	margin: 0;
+	padding: 10px 30px;
+}
+
+.ftitle {
+	font-size: 14px;
+	font-weight: bold;
+	padding: 5px 0;
+	margin-bottom: 10px;
+	border-bottom: 1px solid #ccc;
+}
+
+.fitem {
+	margin-bottom: 5px;
+}
+
+.fitem label {
+	display: inline-block;
+	width: 80px;
+}
+</style>
 <script type="text/javascript">
 	function formatDate(value, row, index) {
 		if (value == null)
 			return "";
-
 		var myDate = new Date(value);
 		return formatterDateTime(myDate);
 	}
+
+	var url;
 	//新建用户
 	//打开新建面板
 	function newUser() {
 		$('#dlg').dialog('open').dialog('setTitle', '新建用户');
 		$('#fm').form('clear');
-		url = 'user/addUser.do';
+		url = 'UserServlet?method=addUser';
+	}
+
+	function editUser() {
+		var row = $('#dg').datagrid('getSelected');
+		if (row) {
+			$('#dlg').dialog('open').dialog('setTitle', '编辑用户信息');
+			$('#fm').form('load', row);
+			url = 'UserServlet?method=updateUser';
+		} else {
+			alert("请选择要编辑的用户");
+		}
+	}
+
+	function delUser() {
+		var row = $('#dg').datagrid('getSelected');
+		if (row) {
+			$.messager.confirm('确认', '确认删除这个用户信息吗?', function(r) {
+				if (r) {
+					//url = 'UserServlet?method=delUser';
+					$.ajax({
+						url : "UserServlet?method=delUser&id="+row.id,
+						type: "post",
+						success : function(data,status,response) {
+							var result = eval('(' + response.responseText + ')');
+							if (result.status == "error") {
+								$.messager.show({
+									title : 'Error',
+									msg : result.msg
+								});
+							} else {
+								$.messager.show({
+									title : 'Success',
+									msg : result.msg
+								});
+								$('#dg').datagrid('reload'); 
+							} 
+						}
+					});
+				}
+			});
+		}
 	}
 	//提交保存请求
 	function saveUser() {
 		$('#fm').form('submit', {
-			url : 'user/addUser.do',
+			url : url,
 			onSubmit : function() {
 				return $(this).form('validate');
 			},
 			success : function(result) {
 				var result = eval('(' + result + ')');
-				if (result.error) {
+				if (result.status == "error") {
 					$.messager.show({
 						title : 'Error',
-						msg : result.message
+						msg : result.msg
 					});
 				} else {
 					$('#dlg').dialog('close'); // close the dialog
@@ -52,7 +117,7 @@
 </script>
 </head>
 <body>
-	
+
 	<table id="dg" class="easyui-datagrid" title="用户列表"
 		style="width: 700px; height: 350px"
 		data-options="singleSelect:true,collapsible:true,
@@ -65,7 +130,8 @@
 				<th data-options="field:'username',width:80">用户名</th>
 				<th data-options="field:'empno',width:100">工号</th>
 				<th data-options="field:'role',width:80,align:'right'">角色</th>
-				<th data-options="field:'lastModifyDate',width:180,align:'right',formatter:formatDate">更新日期</th>
+				<th
+					data-options="field:'lastModifyDate',width:180,align:'right',formatter:formatDate">更新日期</th>
 				<th data-options="field:'createDate',width:180,formatter:formatDate">创建日期</th>
 			</tr>
 		</thead>
@@ -75,6 +141,7 @@
 		buttons="#dlg-buttons">
 		<div class="ftitle">用户信息:</div>
 		<form id="fm" method="post">
+			<input name="id" type="hidden" value="">
 			<div class="fitem">
 				<label>用户名:</label> <input name="username"
 					class="easyui-validatebox" required="true">
@@ -84,11 +151,17 @@
 					required="true">
 			</div>
 			<div class="fitem">
-				<label>邮箱:</label> <input name="Email" class="easyui-validatebox"
-					validType="email">
+				<label>工号:</label> <input name="empno" class="easyui-validatebox"
+					class="easyui-validatebox" required="true">
 			</div>
 			<div class="fitem">
-				<label>QQ:</label> <input name="qq">
+				<label>角色:</label> <select name="role">
+					<option value="0">普通用户</option>
+					<option value="1">管理员</option>
+				</select>
+			</div>
+			<div class="fitem">
+				<span id="errormsg" style="color: red"></span>
 			</div>
 		</form>
 	</div>
@@ -101,11 +174,11 @@
 
 	<div id="tb">
 		<a href="javascript:void(0)" class="easyui-linkbutton"
-			iconCls="icon-add" plain="true" onclick="javascript:newUser()">Add</a>
-		<a href="#" class="easyui-linkbutton" iconCls="icon-cut" plain="true"
-			onclick="javascript:alert('Cut')">Delete</a> <a href="#"
-			class="easyui-linkbutton" iconCls="icon-save" plain="true"
-			onclick="javascript:alert('Save')">Save</a>
+			iconCls="icon-add" plain="true" onclick="javascript:newUser()">新建</a>
+		<a href="javascript:void(0)" class="easyui-linkbutton"
+			iconCls="icon-edit" plain="true" onclick="javascript:editUser()">编辑</a>
+		<a href="javascript:void(0)" class="easyui-linkbutton"
+			iconCls="icon-cut" plain="true" onclick="javascript:delUser()">删除</a>
 	</div>
 </body>
 </html>

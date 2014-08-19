@@ -11,6 +11,8 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import cn.com.cnnoc.expert.model.User;
+
 public class LoginFilter implements Filter {
 	
 	private String param;  
@@ -25,7 +27,7 @@ public class LoginFilter implements Filter {
 		
 		HttpServletRequest request = (HttpServletRequest)req;
 		HttpServletResponse response = (HttpServletResponse) resp;
-		String userInfo = (String) request.getSession().getAttribute("USER_ADMIN");
+		User userInfo = (User) request.getSession().getAttribute(LoginServlet.USER_ADMIN);
 		
 		
 		String url = request.getRequestURI();
@@ -33,9 +35,9 @@ public class LoginFilter implements Filter {
 		
 		if(url.matches(param)){
 			
-			if(!page.equals("/backend/LoginServlet") && !page.equals("/backend/login.jsp")){
+			if(!page.equals("/LoginServlet") && !page.equals("/login.jsp")){
 				if(userInfo == null){
-					response.sendRedirect(request.getContextPath()+"/backend/login.jsp");
+					response.sendRedirect(request.getContextPath()+"/login.jsp");
 					return;
 				}
 			}

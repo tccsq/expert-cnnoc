@@ -61,7 +61,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 		SqlSession session = getSessionFactory().openSession();
 		T t = null;
 		try {
-			t = session.selectOne(clz.getName() + ".findById", id);
+			t = (T)session.selectOne(clz.getName() + ".findById", id);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -87,12 +87,13 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 	}
 
 	@Override
-	public PagerVO<T> findPaged(Class<T> clz,int start, int rows) {
+	public PagerVO<T> findPaged(Class<T> clz,int page, int rows) {
 		SqlSession session = getSessionFactory().openSession();
 		PagerVO<T> pv = new PagerVO<T>();
 		try {
+			int start = (page-1)*rows;
 			
-			int total = session.selectOne(clz.getName() + ".findTotal");
+			Integer total = session.selectOne(clz.getName() + ".findTotal");
 			pv.setTotal(total);
 			
 			Map<String,Integer> params = new HashMap<String,Integer>();

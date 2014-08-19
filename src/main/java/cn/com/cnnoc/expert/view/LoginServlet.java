@@ -22,6 +22,7 @@ import com.sun.image.codec.jpeg.JPEGImageEncoder;
 public class LoginServlet extends BaseServlet {
 
 	private static final long serialVersionUID = 1L;
+	public static final String USER_ADMIN = "USER_ADMIN";
 	private int width;
 	private int height;
 	private int number;
@@ -60,18 +61,17 @@ public class LoginServlet extends BaseServlet {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		User user = userDao.findUserByUsername(username);
+		
 		if (user == null) {
-			writeJson(response, "{\"status\":\"error\",\"msg\":\"用户名" + username + "不存在!\"}");
+			errorMsg("用户名" + username + "不存在!", response);
 			return;
 		} else if (!password.equals(user.getPassword())) {
-			writeJson(response,  "{\"status\":\"error\",\"msg\":\"用户名" + username + "密码错误!\"}");
+			errorMsg("用户" + username + "密码错误!", response);
 			return;
 		}
 
-		request.getSession().setAttribute("USER_ADMIN", username);
-		writeJson(response,  "{\"status\":\"ok\"}");
-		//response.sendRedirect(request.getContextPath() + "/backend/main.jsp");
-
+		request.getSession().setAttribute(USER_ADMIN, user);
+		successMsg(response);
 	}
 
 	@SuppressWarnings("restriction")

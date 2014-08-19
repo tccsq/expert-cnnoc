@@ -6,6 +6,16 @@ public class User extends BaseEntity {
 	private String empno;
 	private Role role;
 
+	public User() {
+	}
+
+	public User(String username, String password, String empno, Role role) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.empno = empno;
+		this.role = role;
+	}
 
 	public String getUsername() {
 		return username;
@@ -44,6 +54,5 @@ public class User extends BaseEntity {
 		return "User [username=" + username + ", password=" + password
 				+ ", empno=" + empno + ", role=" + role + "]";
 	}
-	
-	
+
 }

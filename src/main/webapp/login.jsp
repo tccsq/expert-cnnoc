@@ -120,7 +120,6 @@
 	<div id="dlg-buttons" style="padding-right: 30px;">
 		<a href="#" class="easyui-linkbutton" iconCls="icon-ok"
 			onclick="login()">确定</a>
-		<button onclick="login()">确定</button>
 	</div>
 </body>
 </html>

@@ -27,13 +27,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update t_user set username =
 		#{username}, password = #{password},empno = #{empno},modifyBy =
 		#{modifyBy},
-		roleType = #{role}
+		roleType = #{role,typeHandler=cn.com.cnnoc.expert.handler.EnumRoleHandler}
 		where id = #{id}
 	</update>
 	<select id="findUserByUsername" parameterType="string"
 		resultMap="userMap">
 		select * from t_user where username = #{username}
 	</select>
+	<select id="findUserByEmpno" parameterType="string"
+		resultMap="userMap">
+		select * from t_user where empno = #{empno}
+	</select>
+	
 	<select id="findById" parameterType="int" resultMap="userMap">
 		select *
 		from t_user where id = #{id}
