@@ -6,10 +6,6 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.Random;
 
 import javax.servlet.ServletConfig;
@@ -19,13 +15,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import cn.com.cnnoc.expert.dao.UserDao;
 import cn.com.cnnoc.expert.model.User;
-import cn.com.cnnoc.expert.util.DBUtil;
 
 import com.sun.image.codec.jpeg.JPEGCodec;
 import com.sun.image.codec.jpeg.JPEGImageEncoder;
 
 public class LoginServlet extends BaseServlet {
 
+	private static final long serialVersionUID = 1L;
 	private int width;
 	private int height;
 	private int number;
@@ -78,6 +74,7 @@ public class LoginServlet extends BaseServlet {
 
 	}
 
+	@SuppressWarnings("restriction")
 	public void checkcode(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 

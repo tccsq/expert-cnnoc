@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import cn.com.cnnoc.expert.util.BeanFactory;
 
+import com.sdicons.json.mapper.JSONMapper;
+
 public class BaseServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -96,6 +98,19 @@ public class BaseServlet extends HttpServlet {
 			response.getWriter().print(json);
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
+	}
+	protected void toJSON(HttpServletResponse response,Object obj){
+		try {
+			response.setCharacterEncoding("UTF-8");
+			response.setContentType("text/json;charset=utf-8");
+			response.getWriter().println(
+				JSONMapper.toJSON(obj).render(false)
+			);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("在将对象"+obj+"转换为JSON格式字符串的时候发生异常！");
 		}
 	}
 	

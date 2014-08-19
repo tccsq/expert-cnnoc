@@ -19,22 +19,34 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="insert" parameterType="User">
 		insert into t_user
 		(username,password,empno,roleType,createBy,modifyBy,createDate) values
-		(#{username},#{password},#{empno},#{role,typeHandler=cn.com.cnnoc.expert.handler.EnumRoleHandler},
-			#{createBy},#{modifyBy},#{createDate})
+		(#{username},#{password},#{empno},#{role
+		,typeHandler=cn.com.cnnoc.expert.handler.EnumRoleHandler},
+		#{createBy},#{modifyBy},#{createDate})
 	</insert>
 	<update id="update" parameterType="User">
 		update t_user set username =
-		#{username}, password = #{password},empno = #{empno},modifyBy = #{modifyBy}
+		#{username}, password = #{password},empno = #{empno},modifyBy =
+		#{modifyBy},
+		roleType = #{role}
 		where id = #{id}
 	</update>
 	<select id="findUserByUsername" parameterType="string"
-		resultType="User">
+		resultMap="userMap">
 		select * from t_user where username = #{username}
 	</select>
-	<select id="findById" parameterType="int" resultType="User">
-		select * from t_user where id = #{id}
+	<select id="findById" parameterType="int" resultMap="userMap">
+		select *
+		from t_user where id = #{id}
 	</select>
+	<select id="findTotal" resultType="int">
+		select count(1) from t_user
+	</select>
+	<select id="findPaged" parameterType="java.util.Map" resultMap="userMap">
+		select * from t_user limit #{start},#{rows}
+	</select>
+
 	<delete id="delete" parameterType="int">
-		delete from t_user where id = #{id}
+		delete from t_user where id =
+		#{id}
 	</delete>
 </mapper>

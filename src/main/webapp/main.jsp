@@ -53,7 +53,8 @@
 <DIV style="PADDING-BOTTOM: 5px; PADDING-LEFT: 5px; WIDTH: 250px; PADDING-RIGHT: 5px; PADDING-TOP: 5px"
         title=主菜单 region="west" split="true">
     <UL class=easyui-tree>
-
+		<LI iconCls="icon-gears"><a class="e-link" onclick="open1('UserServlet')"
+                                    href="#">用户管理</a></LI>
         <LI iconCls="icon-gears"><a class="e-link" onclick="open1('expertManage.html')"
                                     href="#">专家管理</a></LI>
 		<LI iconCls="icon-gears"><a class="e-link" onclick="open1('projectManage.html')"
@@ -66,7 +67,7 @@
 </DIV>
 <DIV region="center">
     <DIV id=tt class=easyui-tabs border="false" plain="true" fit="true">
-        <DIV id="welcome" title=welcome style="text-align: center">
+        <DIV id="welcome" title=专家库系统 style="text-align: center">
 			<iframe height="100%" width="100%" frameborder="0" frameborder="0" src="right.jsp" name="rightFrame" id="rightFrame" title="rightFrame"></iframe>
         </DIV>
     </DIV>

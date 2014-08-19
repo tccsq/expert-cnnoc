@@ -12,7 +12,6 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import cn.com.cnnoc.expert.dao.BaseDao;
-import cn.com.cnnoc.expert.model.User;
 import cn.com.cnnoc.expert.vo.PagerVO;
 
 public class BaseDaoImpl<T> implements BaseDao<T> {
@@ -101,7 +100,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 			params.put("rows", rows);
 			List<T> list = session.selectList(clz.getName() + ".findPaged", params);
 			
-			pv.setDatas(list);
+			pv.setRows(list);
 
 		} catch (Exception e) {
 			e.printStackTrace();

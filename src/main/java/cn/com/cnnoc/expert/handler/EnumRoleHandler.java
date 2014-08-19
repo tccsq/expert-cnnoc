@@ -8,10 +8,11 @@ import java.sql.SQLException;
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
 
-import cn.com.cnnoc.expert.model.User.Role;
+import cn.com.cnnoc.expert.model.Role;
 
 public class EnumRoleHandler extends BaseTypeHandler<Role> {
-
+	
+	
 	@Override
 	public Role getNullableResult(ResultSet rs, String columnName)
 			throws SQLException {

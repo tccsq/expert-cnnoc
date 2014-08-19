@@ -137,7 +137,7 @@ public class ArticleDaoImpl extends BaseDaoImpl implements ArticleDao {
 			DBUtil.close(conn);
 		}
 		
-		pagerVO.setDatas(articles);
+		pagerVO.setRows(articles);
 		pagerVO.setTotal(total);
 		
 		return pagerVO;
