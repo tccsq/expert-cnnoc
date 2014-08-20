@@ -3,31 +3,71 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.com.cnnoc.expert.model.Expert">
-
+	<resultMap type="Expert" id="expertMap">
+		<id column="id" property="id" />
+		<result column="expertName" property="expertName" />
+		<result column="idNumber" property="idNumber" />
+		<result column="major" property="major" />
+		<result column="expertDesc" property="expertDesc" />
+		<result column="gender" property="gender"
+			typeHandler="cn.com.cnnoc.expert.handler.EnumGenderHandler" />
+		<result column="createDate" property="createDate" />
+		<result column="lastModifyDate" property="lastModifyDate" />
+		<result column="createBy" property="createBy" />
+		<result column="modifyBy" property="modifyBy" />
+	</resultMap>
 	<insert id="insert" parameterType="Expert">
 		insert into t_expert
-		(expertName,major,expertDesc,createBy,modifyBy,createDate) values 
-		(#{expertName},#{major},#{expertDesc},#{createBy},#{modifyBy},#{createDate})
+		(expertName,idNumber,gender,major,expertDesc,createBy,modifyBy,createDate)
+		values
+		(#{expertName},#{idNumber},#{gender,typeHandler=cn.com.cnnoc.expert.handler.EnumGenderHandler},#{major},#{expertDesc},#{createBy},#{modifyBy},#{createDate})
 	</insert>
 	<update id="update" parameterType="Expert">
-		update t_expert set 
-		expertName=#{expertName}, 
+		update t_expert set
+		expertName=#{expertName},
+		idNumber = #{idNumber},
+		gender =
+		#{gender,typeHandler=cn.com.cnnoc.expert.handler.EnumGenderHandler},
 		major = #{major},
 		expertDesc = #{expertDesc},
-		modifyBy = #{modifyBy} where id = #{id}
+		modifyBy =
+		#{modifyBy}
+		where id = #{id}
 	</update>
-	<select id="findById" parameterType="int" resultType="Expert">
-		select * from t_expert where id = #{id}
+
+	<select id="findById" parameterType="int" resultMap="expertMap">
+		select *
+		from t_expert where id = #{id}
+	</select>
+	<select id="findExpertByIdNumber" parameterType="String"
+		resultMap="expertMap">
+		select *
+		from t_expert where idNumber = #{idNumber}
 	</select>
 	<select id="findTotal" resultType="int">
 		select count(1) from t_expert
 	</select>
-	<select id="findPaged" parameterType="java.util.Map" resultType="Expert">
-		select * from t_expert limit #{start},#{rows}
+	<select id="findPaged" parameterType="java.util.Map" resultMap="expertMap">
+		SELECT
+		t_expert.id,
+		t_expert.expertName,
+		t_expert.gender,
+		t_expert.idNumber,
+		t_expert.major,
+		t_expert.createDate,
+		t_expert.lastModifyDate,
+		t_expert.createBy,
+		t_expert.modifyBy
+		FROM
+		t_expert
+		limit #{start},#{rows}
 	</select>
+
+
 	<delete id="delete" parameterType="int">
-		delete from t_expert where id = #{id}
+		delete from t_expert where id
+		= #{id}
 	</delete>
-	
-	
+
+
 </mapper>

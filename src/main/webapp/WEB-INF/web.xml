@@ -46,6 +46,10 @@
 		<servlet-name>UserServlet</servlet-name>
 		<servlet-class>cn.com.cnnoc.expert.view.UserServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>ExpertServlet</servlet-name>
+		<servlet-class>cn.com.cnnoc.expert.view.ExpertServlet</servlet-class>
+	</servlet>
 
 
 
@@ -96,10 +100,14 @@
 		<servlet-name>UserServlet</servlet-name>
 		<url-pattern>/UserServlet</url-pattern>
 	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ExpertServlet</servlet-name>
+		<url-pattern>/ExpertServlet</url-pattern>
+	</servlet-mapping>
 
 
 
 	<welcome-file-list>
-		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>login.jsp</welcome-file>
 	</welcome-file-list>
 </web-app>

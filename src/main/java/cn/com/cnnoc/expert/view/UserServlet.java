@@ -6,9 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import cn.com.cnnoc.expert.dao.ArticleDao;
 import cn.com.cnnoc.expert.dao.UserDao;
-import cn.com.cnnoc.expert.model.Article;
 import cn.com.cnnoc.expert.model.Role;
 import cn.com.cnnoc.expert.model.User;
 import cn.com.cnnoc.expert.util.CommonUtil;
@@ -17,7 +15,6 @@ import cn.com.cnnoc.expert.vo.PagerVO;
 public class UserServlet extends BaseServlet {
 
 	private static final long serialVersionUID = 1L;
-	private ArticleDao articleDao;
 	private UserDao userDao;
 
 	@Override
@@ -26,6 +23,14 @@ public class UserServlet extends BaseServlet {
 		response.sendRedirect(request.getContextPath() + "/user/index.jsp");
 	}
 
+	/**
+	 * 获取用户列表
+	 * 
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
 	public void getUserList(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		int page = 0;
@@ -42,6 +47,14 @@ public class UserServlet extends BaseServlet {
 		toJSON(response, pagerVO);
 	}
 
+	/**
+	 * 添加用户
+	 * 
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
 	public void addUser(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// 获取参数
@@ -78,6 +91,14 @@ public class UserServlet extends BaseServlet {
 		successMsg(response);
 	}
 
+	/**
+	 * 更新用户
+	 * 
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
 	public void updateUser(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// 获取参数
@@ -118,67 +139,21 @@ public class UserServlet extends BaseServlet {
 		successMsg(response);
 	}
 
+	/**
+	 * 删除用户
+	 * 
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
 	public void delUser(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO 对用户的删除需要确认，是否需要做假删除
-
 		String idstr = request.getParameter("id");
 		userDao.deleteById(User.class, Integer.parseInt(idstr));
 
 		successMsg(response);
-	}
-
-	public void loadArticle(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-
-		String id = request.getParameter("id");
-		Article article = new Article();
-
-		if (id == null) {
-			request.setAttribute("error", "ID不能为空");
-			request.getRequestDispatcher("/backend/common/error.jsp").forward(
-					request, response);
-			return;
-		}
-
-		article = articleDao.findArticleById(Integer.parseInt(id));
-
-		request.setAttribute("article", article);
-
-		request.getRequestDispatcher("/backend/article/open_input_article.jsp")
-				.forward(request, response);
-
-	}
-
-	public void updateArticle(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-
-		String id = request.getParameter("id");
-		String title = request.getParameter("title");
-		String content = request.getParameter("content");
-
-		if (id == null) {
-			request.setAttribute("error", "用户Id为空");
-
-			request.getRequestDispatcher("/backend/common/error.jsp").forward(
-					request, response);
-			return;
-		}
-
-		Article article = new Article();
-		article.setTitle(title);
-		article.setContent(content);
-
-		articleDao.updateArticle(article);
-
-		request.getRequestDispatcher(
-				"/backend/article/update_article_success.jsp").forward(request,
-				response);
-
-	}
-
-	public void setArticleDao(ArticleDao articleDao) {
-		this.articleDao = articleDao;
 	}
 
 	public void setUserDao(UserDao userDao) {

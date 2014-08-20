@@ -58,6 +58,15 @@
 		if (row) {
 			$('#dlg').dialog('open').dialog('setTitle', '编辑用户信息');
 			$('#fm').form('load', row);
+			//给角色下拉框赋值
+			var roleVal;
+			if(row.role == "USER")
+				roleVal = 0;
+			else if(row.role =="ADMIN")
+				roleVal = 1;
+			var data = $('#role').combobox('getData');
+			$('#role').combobox("select", data[roleVal].value);
+			
 			url = 'UserServlet?method=updateUser';
 		} else {
 			alert("请选择要编辑的用户");
@@ -119,7 +128,7 @@
 <body>
 
 	<table id="dg" class="easyui-datagrid" title="用户列表"
-		style="width: 700px; height: 350px"
+		fit="true"
 		data-options="singleSelect:true,collapsible:true,
 		pagination:true,pageSize:10,pageList: [10, 15, 20, 25, 30],
 		url:'UserServlet?method=getUserList',method:'get',
@@ -155,8 +164,9 @@
 					class="easyui-validatebox" required="true">
 			</div>
 			<div class="fitem">
-				<label>角色:</label> <select name="role">
-					<option value="0">普通用户</option>
+				<label>角色:</label> 
+				<select id="role" name="role" class="easyui-combobox">
+					<option value="0" selected="selected">普通用户</option>
 					<option value="1">管理员</option>
 				</select>
 			</div>
@@ -167,9 +177,9 @@
 	</div>
 	<div id="dlg-buttons">
 		<a href="javascript:void(0)" class="easyui-linkbutton"
-			iconCls="icon-ok" onclick="saveUser()">Save</a> <a
+			iconCls="icon-ok" onclick="saveUser()">保存</a> <a
 			href="javascript:void(0)" class="easyui-linkbutton"
-			iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')">Cancel</a>
+			iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')">取消</a>
 	</div>
 
 	<div id="tb">

@@ -14,6 +14,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	<typeHandlers>
 		<typeHandler handler="cn.com.cnnoc.expert.handler.EnumRoleHandler"
 			javaType="cn.com.cnnoc.expert.model.Role" jdbcType="INTEGER" />
+		<typeHandler handler="cn.com.cnnoc.expert.handler.EnumGenderHandler"
+			javaType="cn.com.cnnoc.expert.model.Gender" jdbcType="INTEGER" />
 	</typeHandlers>
 
 	<environments default="development">

@@ -55,7 +55,7 @@
     <UL class=easyui-tree>
 		<LI iconCls="icon-gears"><a class="e-link" onclick="open1('UserServlet')"
                                     href="#">用户管理</a></LI>
-        <LI iconCls="icon-gears"><a class="e-link" onclick="open1('expertManage.html')"
+        <LI iconCls="icon-gears"><a class="e-link" onclick="open1('ExpertServlet')"
                                     href="#">专家管理</a></LI>
 		<LI iconCls="icon-gears"><a class="e-link" onclick="open1('projectManage.html')"
                                     href="#">项目管理</a></LI>
