@@ -18,3 +18,4 @@ function formatterDateTime(date) {
 					.getSeconds());
 	return datetime;
 }
+

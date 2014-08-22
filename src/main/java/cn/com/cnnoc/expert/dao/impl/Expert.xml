@@ -47,6 +47,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="findTotal" resultType="int">
 		select count(1) from t_expert
 	</select>
+	
+	<select id="findAll" resultMap="expertMap">
+		SELECT
+		t_expert.id,
+		t_expert.expertName,
+		t_expert.gender,
+		t_expert.idNumber,
+		t_expert.major
+		FROM
+		t_expert
+	</select>
 	<select id="findPaged" parameterType="java.util.Map" resultMap="expertMap">
 		SELECT
 		t_expert.id,

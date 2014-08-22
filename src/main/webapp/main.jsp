@@ -57,7 +57,7 @@
                                     href="#">用户管理</a></LI>
         <LI iconCls="icon-gears"><a class="e-link" onclick="open1('ExpertServlet')"
                                     href="#">专家管理</a></LI>
-		<LI iconCls="icon-gears"><a class="e-link" onclick="open1('projectManage.html')"
+		<LI iconCls="icon-gears"><a class="e-link" onclick="open1('ProjectServlet')"
                                     href="#">项目管理</a></LI>
         <LI iconCls="icon-gears"><a class="e-link" onclick="open1('expertGrade.html')"
                                     href="#">评审评分</a></LI>

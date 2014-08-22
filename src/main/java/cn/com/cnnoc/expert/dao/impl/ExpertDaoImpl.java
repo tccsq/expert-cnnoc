@@ -1,5 +1,7 @@
 package cn.com.cnnoc.expert.dao.impl;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 
 import cn.com.cnnoc.expert.dao.ExpertDao;
@@ -20,8 +22,25 @@ public class ExpertDaoImpl extends BaseDaoImpl<Expert> implements ExpertDao {
 		} finally {
 			session.close();
 		}
-		
+
 		return expert;
+	}
+
+	@Override
+	public List<Expert> findAllExpert() {
+		SqlSession session = getSessionFactory().openSession();
+
+		List<Expert> experts = null;
+		try {
+			experts = session.selectList(Expert.class.getName() + ".findAll");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+
+		return experts;
 	}
 
 }

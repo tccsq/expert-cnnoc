@@ -1,6 +1,10 @@
 package cn.com.cnnoc.expert.view;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -34,7 +38,7 @@ public class ExpertServlet extends BaseServlet {
 	 */
 	public void getExpertList(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		int page = 0;
+		int page = 1;
 		int rows = 10;
 		try {
 			page = Integer.parseInt(request.getParameter("page"));
@@ -46,6 +50,34 @@ public class ExpertServlet extends BaseServlet {
 		PagerVO<Expert> pagerVO = expertDao.findPaged(Expert.class, page, rows);
 
 		toJSON(response, pagerVO);
+	}
+
+	/**
+	 * 获取专家列表,返回数据结构供下拉列表使用
+	 * 
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	public void getExpertComboxList(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+
+		List<Map<String, String>> datas = new ArrayList<Map<String, String>>();
+
+		List<Expert> list = expertDao.findAllExpert();
+		if (list == null || list.size() == 0)
+			return;
+
+		for (Expert e : list) {
+			Map<String, String> data = new HashMap<String, String>();
+			data.put("expertName", e.getExpertName());
+			data.put("id", e.getId() + "");
+			data.put("idNumber", e.getIdNumber());
+			datas.add(data);
+		}
+
+		toJSON(response, datas);
 	}
 
 	/**
@@ -132,20 +164,21 @@ public class ExpertServlet extends BaseServlet {
 
 		successMsg(response);
 	}
-	
+
 	/**
-	 * 查询专家
-	 * 主要在显示专家简历时使用
+	 * 查询专家 主要在显示专家简历时使用
+	 * 
 	 * @param request
 	 * @param response
 	 * @throws ServletException
 	 * @throws IOException
 	 */
-	public void loadExpert(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	public void loadExpert(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		// TODO 对的删除需要确认，是否需要做假删除
 		String idstr = request.getParameter("id");
-		Expert expert = expertDao.findById(Expert.class, Integer.parseInt(idstr));
+		Expert expert = expertDao.findById(Expert.class,
+				Integer.parseInt(idstr));
 
 		toJSON(response, expert);
 	}
@@ -158,8 +191,8 @@ public class ExpertServlet extends BaseServlet {
 	 * @throws ServletException
 	 * @throws IOException
 	 */
-	public void delExpert(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	public void delExpert(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		// TODO 对的删除需要确认，是否需要做假删除
 		String idstr = request.getParameter("id");
 		expertDao.deleteById(Expert.class, Integer.parseInt(idstr));

@@ -50,6 +50,14 @@
 		<servlet-name>ExpertServlet</servlet-name>
 		<servlet-class>cn.com.cnnoc.expert.view.ExpertServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>ProjectServlet</servlet-name>
+		<servlet-class>cn.com.cnnoc.expert.view.ProjectServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>EvaluationServlet</servlet-name>
+		<servlet-class>cn.com.cnnoc.expert.view.EvaluationServlet</servlet-class>
+	</servlet>
 
 
 
@@ -103,6 +111,14 @@
 	<servlet-mapping>
 		<servlet-name>ExpertServlet</servlet-name>
 		<url-pattern>/ExpertServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ProjectServlet</servlet-name>
+		<url-pattern>/ProjectServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>EvaluationServlet</servlet-name>
+		<url-pattern>/EvaluationServlet</url-pattern>
 	</servlet-mapping>
 
 

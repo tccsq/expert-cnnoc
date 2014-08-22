@@ -7,6 +7,19 @@ public class Project extends BaseEntity {
 	private String endDate;
 	private String projectDesc;
 
+	public Project() {
+	}
+
+	public Project(String projectName, String projectLocation,
+			String startDate, String endDate, String projectDesc) {
+		super();
+		this.projectName = projectName;
+		this.projectLocation = projectLocation;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.projectDesc = projectDesc;
+	}
+
 	public String getProjectName() {
 		return projectName;
 	}

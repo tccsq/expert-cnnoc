@@ -57,11 +57,11 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 	}
 
 	@Override
-	public T findById(Class<T> clz,int id) {
+	public T findById(Class<T> clz, int id) {
 		SqlSession session = getSessionFactory().openSession();
 		T t = null;
 		try {
-			t = (T)session.selectOne(clz.getName() + ".findById", id);
+			t = (T) session.selectOne(clz.getName() + ".findById", id);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -87,20 +87,21 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 	}
 
 	@Override
-	public PagerVO<T> findPaged(Class<T> clz,int page, int rows) {
+	public PagerVO<T> findPaged(Class<T> clz, int page, int rows) {
 		SqlSession session = getSessionFactory().openSession();
 		PagerVO<T> pv = new PagerVO<T>();
 		try {
-			int start = (page-1)*rows;
-			
+			int start = (page - 1) * rows;
+
 			Integer total = session.selectOne(clz.getName() + ".findTotal");
 			pv.setTotal(total);
-			
-			Map<String,Integer> params = new HashMap<String,Integer>();
+
+			Map<String, Integer> params = new HashMap<String, Integer>();
 			params.put("start", start);
 			params.put("rows", rows);
-			List<T> list = session.selectList(clz.getName() + ".findPaged", params);
-			
+			List<T> list = session.selectList(clz.getName() + ".findPaged",
+					params);
+
 			pv.setRows(list);
 
 		} catch (Exception e) {
@@ -109,7 +110,41 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 		} finally {
 			session.close();
 		}
-		
+
+		return pv;
+	}
+
+	@Override
+	public PagerVO<T> findPaged(Class<T> clz, Map<String, Object> params,
+			int page, int rows) {
+		SqlSession session = getSessionFactory().openSession();
+		PagerVO<T> pv = new PagerVO<T>();
+		try {
+			int start = (page - 1) * rows;
+			if (params == null)
+				params = new HashMap<String, Object>();
+			params.put("start", start);
+			params.put("rows", rows);
+			
+			//查询数量
+			Integer total = session.selectOne(clz.getName()
+					+ ".findParamsTotal", params);
+			pv.setTotal(total);
+
+			
+			
+			List<T> list = session.selectList(clz.getName()
+					+ ".findParamsPaged", params);
+
+			pv.setRows(list);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			session.rollback();
+		} finally {
+			session.close();
+		}
+
 		return pv;
 	}
 

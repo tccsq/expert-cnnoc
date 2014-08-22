@@ -9,6 +9,9 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="cn.com.cnnoc.expert.model.Channel" alias="Channel" />
 		<typeAlias type="cn.com.cnnoc.expert.model.Expert" alias="Expert" />
 		<typeAlias type="cn.com.cnnoc.expert.model.Project" alias="Project" />
+		<typeAlias type="cn.com.cnnoc.expert.model.Evaluation" alias="Evaluation" />
+		<!-- 值对象 -->
+		<typeAlias type="cn.com.cnnoc.expert.vo.EvaluationVO" alias="EvaluationVO" />
 	</typeAliases>
 
 	<typeHandlers>
@@ -35,5 +38,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="cn/com/cnnoc/expert/dao/impl/Channel.xml" />
 		<mapper resource="cn/com/cnnoc/expert/dao/impl/Expert.xml" />
 		<mapper resource="cn/com/cnnoc/expert/dao/impl/Project.xml" />
+		<mapper resource="cn/com/cnnoc/expert/dao/impl/Evaluation.xml" />
 	</mappers>
 </configuration>

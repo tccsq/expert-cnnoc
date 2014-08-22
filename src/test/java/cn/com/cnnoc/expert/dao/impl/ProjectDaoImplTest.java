@@ -11,13 +11,13 @@ public class ProjectDaoImplTest extends TestCase {
 			.getBean("ProjectDao");
 
 	public void testAdd() {
-		for (int i = 0; i < 50; i++) {
+		for (int i = 1; i < 31; i++) {
 			Project p = new Project();
 			p.setProjectName("projectName" + i);
 			p.setProjectLocation("projectLocation" + i);
 			p.setProjectDesc("projectDesc" + i);
-			p.setStartDate("2013-08-" + i);
-			p.setEndDate("2014-08-" + i);
+			p.setStartDate("2014-09-"+i);
+			p.setEndDate("2014-08-"+i);
 			p.setCreateBy(1);
 			projectDao.add(p);
 		}

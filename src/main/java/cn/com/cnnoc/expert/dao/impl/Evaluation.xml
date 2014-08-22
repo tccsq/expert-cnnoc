@@ -3,33 +3,67 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.com.cnnoc.expert.model.Evaluation">
-
+	<resultMap type="cn.com.cnnoc.expert.vo.EvaluationVO" id="evaluationVO">
+		<id column="id" property="id"/>
+		<result column="evaluationContent" property="evaluationContent"/>
+		<result column="projectName" property="projectName"/>
+		<result column="projectId" property="projectId"/>
+		<result column="expertId" property="expertId"/>
+		<result column="idNumber" property="idNumber"/>
+		<result column="expertName" property="expertName"/>
+	</resultMap>
+	
 	<insert id="insert" parameterType="Evaluation">
 		insert into t_evaluation
-		(projectId,expertId,projectDesc,startDate,endDate,createBy,modifyBy,createDate) values 
-		(#{projectId},#{expertId},#{projectDesc},#{startDate},#{endDate},#{createBy},#{modifyBy},#{createDate})
+		(projectId,expertId,evaluationContent,avgGrade,createBy,modifyBy,createDate) values 
+		(#{projectId},#{expertId},#{evaluationContent},#{avgGrade},#{createBy},#{modifyBy},#{createDate})
 	</insert>
 	<update id="update" parameterType="Evaluation">
 		update t_evaluation set 
-		projectName=#{projectName}, 
-		projectLocation = #{projectLocation},
-		projectDesc = #{projectDesc},
-		startDate = #{startDate},
-		endDate = #{endDate},
+		projectId=#{projectId}, 
+		expertId = #{expertId},
+		evaluationContent = #{evaluationContent},
 		modifyBy = #{modifyBy} where id = #{id}
 	</update>
+	
 	<select id="findById" parameterType="int" resultType="Evaluation">
 		select * from t_evaluation where id = #{id}
 	</select>
+	
 	<select id="findTotal" resultType="int">
 		select count(1) from t_evaluation
 	</select>
+	
 	<select id="findPaged" parameterType="java.util.Map" resultType="Evaluation">
 		select * from t_evaluation limit #{start},#{rows}
 	</select>
+	
+	<select id="findParamsTotal" resultType="int">
+		select count(1) from t_evaluation where 1 = 1
+		<if test="projectId != null">
+			 and projectId = #{projectId}
+		</if>
+		<if test="projectName != null">
+			 and projectName like  #{projectName}
+		</if>
+		<if test="expertId != null">
+			 and expertId like  #{expertId}
+		</if>
+	</select>
+	
+	<select id="findParamsPaged" parameterType="java.util.Map" resultType="evaluationVO">
+		select t1.*,t2.projectName,t3.expertName,t3.idNumber from t_evaluation t1 left join t_project t2 on t1.projectId=t2.id left join t_expert t3 on t1.expertId= t3.id where 1 = 1
+		<if test="projectId != null">
+			 and projectId = #{projectId}
+		</if>
+		
+		<if test="expertId != null">
+			 and expertId like  #{expertId}
+		</if>
+		limit #{start},#{rows}
+	</select>
+	
 	<delete id="delete" parameterType="int">
 		delete from t_evaluation where id = #{id}
 	</delete>
-	
-	
 </mapper>

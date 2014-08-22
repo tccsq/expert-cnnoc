@@ -5,7 +5,18 @@ public class Evaluation extends BaseEntity {
 	private int expertId;
 	private String evaluationContent;
 	private String avgGrade;
-	
+
+	public Evaluation() {
+		super();
+	}
+
+	public Evaluation(int projectId, int expertId, String evaluationContent) {
+		super();
+		this.projectId = projectId;
+		this.expertId = expertId;
+		this.evaluationContent = evaluationContent;
+	}
+
 	public int getProjectId() {
 		return projectId;
 	}
